@@ -1,19 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Constants from 'expo-constants';
+import AppTheme from './AppTheme';
+import Home from './screens/Home';
+import Category from './screens/Category';
+import NewTask from './screens/NewTask';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <View style={styles.container}>
+          <Stack.Screen name="Home" compponent={Home} />
+          <Stack.Screen name="Category" component={Category} />
+          <Stack.Screen name="NewTask" component={NewTask} />
+        </View>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: AppTheme.LightColors.secondary,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: Constants.statusBarHeight
   },
 });
