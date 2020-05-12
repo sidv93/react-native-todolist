@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
 import AppTheme from './AppTheme';
 import Home from './screens/Home';
-import Category from './screens/Category';
+import Tasks from './screens/Tasks';
 import NewTask from './screens/NewTask';
 
 const Stack = createStackNavigator();
@@ -16,7 +16,7 @@ export default function App() {
       <Stack.Navigator>
         <View style={styles.container}>
           <Stack.Screen name="Home" compponent={Home} />
-          <Stack.Screen name="Category" component={Category} />
+          <Stack.Screen name="Tasks" component={Tasks} />
           <Stack.Screen name="NewTask" component={NewTask} />
         </View>
       </Stack.Navigator>
