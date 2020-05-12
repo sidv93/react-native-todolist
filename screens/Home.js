@@ -1,29 +1,25 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import AppTheme from '../AppTheme';
-import HomeHeader from '../components/HomeHeader';
 import CardList from '../components/CardList';
 import AddButton from '../components/AddButton';
+import sampleData from '../sampleData';
+import Constants from 'expo-constants'; 
 
 const Home = () => {
     return (
-        <View style={styles.container}>
-            <HomeHeader />
-            <CardList cards={[]} />
-            <View style={styles.addButtonContainer}>
-                <AddButton />
-            </View>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <CardList cards={sampleData.categories} />
+            <AddButton />
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: AppTheme.LightColors.secondary
-    },
-    addButtonContainer: {
-        
+        backgroundColor: AppTheme.LightColors.secondary,
+        marginTop: Constants.statusBarHeight
     }
 })
 

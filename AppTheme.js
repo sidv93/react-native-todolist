@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 const LightColors = {
-    primary: '',
-    secondary: ''
+    primary: '#5886FF',
+    secondary: '#FFFFFF'
 };
 
 const DarkColors = {
@@ -11,12 +11,15 @@ const DarkColors = {
 };
 
 const Font = {
-    family: 'Roboto'
+    family: 'Roboto',
 };
 
 const TextColors = {
-    primary: '',
-    secondary: ''
+    primary: '#FFFFFF',
+    secondary: '',
+    taskTimeColor: '#676767',
+    sectionColor: '#9B9B9B',
+    taskLateColor: '#FE6A6A'
 }
 
 export default { LightColors, DarkColors, Font, TextColors };

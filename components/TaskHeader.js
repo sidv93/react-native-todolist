@@ -23,7 +23,7 @@ const TaskHeader = ({task}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'inherit'
+        backgroundColor: AppTheme.LightColors.primary
     },
     optionsContainer: {
 

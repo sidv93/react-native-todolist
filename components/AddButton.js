@@ -1,25 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import AppTheme from '../AppTheme';
 
 const AddButton = () => {
     return (
-        <View styles={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => alert('Plus pressed!')}>
             <Text style={styles.plus}>+</Text>
-        </View>
+        </TouchableOpacity>
     )
 };
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: AppTheme.LightColors.primary,
+        position: 'absolute',
+        bottom: 40,
+        right: 30,
+        height: 80,
+        width: 80,
         borderRadius: 50,
-        height: 50,
-        width: 50
+        elevation: 15
     },
     plus: {
-        fontSize: 24,
-        color: AppTheme.TextColors.primary
+        fontSize: 48,
+        color: AppTheme.TextColors.primary,
+        textAlign: 'center',
+        margin: 6
     }
 });
 

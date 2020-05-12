@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import AppTheme from '../AppTheme';
 
 const HomeHeader = () => {
@@ -12,11 +12,13 @@ const HomeHeader = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        marginVertical: 20,
+        marginHorizontal: 30
     },
     header: {
-        fontSize: 24,
-        fontFamily: AppTheme.Font.family
+        fontSize: 36,
+        fontFamily: AppTheme.Font.family,
+        fontWeight: 'bold'
     }
 });
 
