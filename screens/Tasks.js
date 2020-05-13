@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: AppTheme.LightColors.primary,
-        marginTop: Constants.statusBarHeight
+        paddingTop: Constants.statusBarHeight
     }
 });
 

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: AppTheme.LightColors.secondary,
-        marginTop: Constants.statusBarHeight
+        paddingTop: Constants.statusBarHeight
     }
 })
 

@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode={'none'} initialRouteName={"Home"} cardStyle={{backgroundColor: 'blue'}}>
+      <Stack.Navigator headerMode={'none'} initialRouteName={"Home"} mode={'modal'}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Tasks" component={Tasks} />
         <Stack.Screen name="NewTask" component={NewTask} />
