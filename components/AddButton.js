@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import AppTheme from '../AppTheme';
+import { useNavigation } from '@react-navigation/native';
 
 const AddButton = () => {
+    const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.container} onPress={() => alert('Plus pressed!')}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('NewTask')}>
             <Text style={styles.plus}>+</Text>
         </TouchableOpacity>
     )

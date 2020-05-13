@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, SectionList, SafeAreaView } from 'react-native';
+import { StyleSheet, SectionList, SafeAreaView, Text } from 'react-native';
 import AppTheme from '../AppTheme';
 import Task from './Task';
 
@@ -7,7 +7,8 @@ const TaskList = ({ tasks }) => {
     return (
         <SafeAreaView style={styles.container}>
             <SectionList
-                sections={DATA}
+                sections={tasks}
+                showsVerticalScrollIndicator={false}
                 keyExtractor={(item, index) => String(index)}
                 renderItem={({ item }) => <Task task={item} />}
                 renderSectionHeader={({ section: { title } }) => (
@@ -20,8 +21,17 @@ const TaskList = ({ tasks }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: AppTheme.LightColors.secondary
+        flex: 2,
+        backgroundColor: AppTheme.LightColors.secondary,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        paddingVertical: 20,
+        paddingHorizontal: 30
+    },
+    header: {
+        color: AppTheme.TextColors.sectionColor,
+        fontSize: 18,
+        marginVertical: 10
     }
 });
 

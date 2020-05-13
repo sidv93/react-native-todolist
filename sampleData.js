@@ -8,37 +8,37 @@ const sampleData = {
         {
             title: 'home',
             icon: require('./assets/icons/home.png'),
-            text: '23 tasks'
+            text: '2 tasks'
         },
         {
             title: 'travel',
             icon: require('./assets/icons/travel.png'),
-            text: '23 tasks'
+            text: '12 tasks'
         },
         {
             title: 'study',
             icon: require('./assets/icons/study.png'),
-            text: '23 tasks'
+            text: '33 tasks'
         },
         {
             title: 'shopping',
             icon: require('./assets/icons/shopping.png'),
-            text: '23 tasks'
+            text: '19 tasks'
         },
         {
             title: 'all',
             icon: require('./assets/icons/alltasks.png'),
-            text: '23 tasks'
+            text: '20 tasks'
         },
         {
             title: 'study',
             icon: require('./assets/icons/study.png'),
-            text: '23 tasks'
+            text: '3 tasks'
         },
         {
             title: 'shopping',
             icon: require('./assets/icons/shopping.png'),
-            text: '23 tasks'
+            text: '7 tasks'
         },
         {
             title: 'all',
