@@ -39,11 +39,11 @@ const styles = StyleSheet.create({
         color: AppTheme.TextColors.sectionColor
     },
     taskInput: {
-        height: 80,
+        height: 60,
         borderBottomWidth: 0.5,
         borderBottomColor: AppTheme.TextColors.sectionColor,
         marginBottom: 20,
-        fontSize: 28,
+        fontSize: 20,
         color: AppTheme.TextColors.sectionColor
     },
     taskTitle: {

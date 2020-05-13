@@ -10,7 +10,7 @@ const NewTask = () => {
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={{flex:1}}>
+                <View style={{ flex: 1 }}>
                     <NewTaskHeader />
                     <AddTask />
                     <CreateButton />

@@ -5,6 +5,7 @@ import TaskHeader from '../components/TaskHeader';
 import TaskList from '../components/TaskList';
 import AddButton from '../components/AddButton';
 import Constants from 'expo-constants';
+import { MenuProvider } from 'react-native-popup-menu';
 
 import sampledata from '../sampleData';
 
@@ -90,11 +91,13 @@ const tasks = [
 
 const Tasks = ({ category }) => {
     return (
-        <View style={styles.container}>
-            <TaskHeader />
-            <TaskList tasks={tasks} />
-            <AddButton />
-        </View>
+        <MenuProvider>
+            <View style={styles.container}>
+                <TaskHeader />
+                <TaskList tasks={tasks} />
+                <AddButton />
+            </View>
+        </MenuProvider>
     )
 }
 
