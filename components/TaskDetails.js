@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import Reminder from '../assets/icons/reminder.png';
 import Category from '../assets/icons/category.png';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -9,16 +9,21 @@ import AppTheme from '../AppTheme';
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const tags = ['Home', 'Work', 'Travel', 'Study', 'Shopping'];
 
-const TaskDetails = () => {
+const TaskDetails = ({onDateTimeChange, onTagChange}) => {
     const [mode, setMode] = useState('date');
     const [showPicker, togglePicker] = useState(false);
     const [date, setDate] = useState(new Date());
-    const [tag, setTag] = useState('select');
+    const [tag, setTag] = useState('Select Category');
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         togglePicker(Platform.OS === 'ios');
         setDate(currentDate);
+        onDateTimeChange(currentDate);
     };
+    const tagChange = (tag) => {
+        setTag(tag);
+        onTagChange(tag);
+    }
     const showMode = currentMode => {
         togglePicker(true);
         setMode(currentMode);ƒ
@@ -32,7 +37,7 @@ const TaskDetails = () => {
         showMode('time');
     };
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior={'height'}>
             <View style={styles.row}>
                 <Image source={Reminder} style={styles.icon} />
                 <TouchableOpacity onPress={showDatepicker}>
@@ -59,12 +64,12 @@ const TaskDetails = () => {
                     <>
                         <Menu>
                             <MenuTrigger>
-                                <Text style={styles.text}>Select Category</Text>
+                                <Text style={styles.text}>{tag}</Text>
                             </MenuTrigger>
                             <MenuOptions>
                                 {
                                     tags.map(
-                                        tag => <MenuOption key={tag}>
+                                        tag => <MenuOption key={tag} onSelect={() => tagChange(tag)}>
                                             <Text style={styles.tag}>{tag}</Text>
                                         </MenuOption>
                                     )
@@ -75,14 +80,15 @@ const TaskDetails = () => {
                 </TouchableOpacity>
                 
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 
 };
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 30,
+        marginVertical: 20,
+        marginHorizontal: 20,
         flex: 1
     },
     row: {

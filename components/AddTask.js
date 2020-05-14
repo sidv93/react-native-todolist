@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import AppTheme from '../AppTheme';
-import TaskDetails from './TaskDetails';
 
-const AddTask = () => {
+const AddTask = ({onTitleChange, onDescriptionChange}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const onChangeTitle = (value) => {
+        setTitle(value);
+        onTitleChange(value);
+    }
+    const onChangeDescription = (value) => {
+        setDescription(value);
+        onDescriptionChange(value);
+    }
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
             <Text style={styles.label}>Task Title</Text>
@@ -13,7 +20,7 @@ const AddTask = () => {
                 multiline={false}
                 placeholder={'Title'}
                 style={styles.taskTitle}
-                onChangeText={text => setTitle(text)}
+                onChangeText={onChangeTitle}
                 value={title}
             />
             <Text style={styles.label}>What are you planning?</Text>
@@ -22,10 +29,9 @@ const AddTask = () => {
                 placeholder={'Description'}
                 numberOfLines={3}
                 style={styles.taskInput}
-                onChangeText={text => setDescription(text)}
+                onChangeText={onChangeDescription}
                 value={description}
             />
-            <TaskDetails />
         </KeyboardAvoidingView>
     )
 }
@@ -33,7 +39,7 @@ const AddTask = () => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
-        flex: 2
+        flex: 1
     },
     label: {
         color: AppTheme.TextColors.sectionColor
