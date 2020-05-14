@@ -5,18 +5,22 @@ import Constants from 'expo-constants';
 import CreateButton from '../components/CreateButton';
 import NewTaskHeader from '../components/NewTaskHeader';
 import AddTask from '../components/AddTask';
+import { MenuProvider } from 'react-native-popup-menu';
 
 const NewTask = () => {
     return (
-        <KeyboardAvoidingView style={styles.container} behavior={'height'}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={{ flex: 1 }}>
-                    <NewTaskHeader />
-                    <AddTask />
-                    <CreateButton />
-                </View>
-            </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+        <MenuProvider>
+            <KeyboardAvoidingView style={styles.container} behavior={'height'}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={{ flex: 1 }}>
+                        <NewTaskHeader />
+                        <AddTask />
+                        <CreateButton />
+                    </View>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
+        </MenuProvider>
+
     )
 }
 

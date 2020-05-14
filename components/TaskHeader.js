@@ -5,12 +5,9 @@ import BackButton from '../assets/icons/back.png';
 import OptionsButton from '../assets/icons/options.png';
 import sample from '../assets/icons/art.png';
 import { useNavigation } from '@react-navigation/native';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-  } from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu';
+
+const options = ['Delete all', 'Mark all read', 'Exit'];
 
 const TaskHeader = ({ task }) => {
     const navigation = useNavigation();
@@ -27,15 +24,11 @@ const TaskHeader = ({ task }) => {
                                 <Image source={OptionsButton} style={styles.options} />
                             </MenuTrigger>
                             <MenuOptions>
-                                <MenuOption>
-                                    <Text style={{fontSize: 18, color: AppTheme.TextColors.sectionColor, padding: 10}}>Delete all</Text>
-                                </MenuOption>
-                                <MenuOption>
-                                    <Text style={{fontSize: 18, color: AppTheme.TextColors.sectionColor, padding: 10}}>Mark all as read</Text>
-                                </MenuOption>
-                                <MenuOption>
-                                    <Text style={{fontSize: 18, color: AppTheme.TextColors.sectionColor, padding: 10}}>Exit</Text>
-                                </MenuOption>
+                                {
+                                    options.map(option =><MenuOption key={option}>
+                                        <Text style={styles.optionsDropdown}>{option}</Text>
+                                    </MenuOption>)
+                                }
                             </MenuOptions>
                         </Menu>
                     </>
@@ -104,6 +97,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         fontWeight: '100'
+    },
+    optionsDropdown: {
+        fontSize: 18,
+        color: AppTheme.TextColors.sectionColor,
+        padding: 10
     }
 });
 

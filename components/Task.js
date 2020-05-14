@@ -1,16 +1,21 @@
-import React from 'react';
-import { StyleSheet, View, Text, CheckBox } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import AppTheme from '../AppTheme';
 
 const Task = ({ task }) => {
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
                 <Text style={styles.taskName}>{task.title}</Text>
                 <Text style={styles.taskDate}>{task.timestamp}</Text>
             </View>
-            <CheckBox center checkedColor={"blue"}
-                uncheckedColor={AppTheme.TextColors.taskTimeColor} checked={false} />
+            <CheckBox
+                value={toggleCheckBox}
+                onValueChange={() => toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)}
+                tintColors={{true: AppTheme.TextColors.sectionColor, false: AppTheme.TextColors.sectionColor}}
+            />
         </View>
     )
 };

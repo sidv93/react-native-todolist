@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, Picker, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import Reminder from '../assets/icons/reminder.png';
 import Category from '../assets/icons/category.png';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu';    
 import AppTheme from '../AppTheme';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const tags = ['Home', 'Work', 'Travel', 'Study', 'Shopping'];
 
 const TaskDetails = () => {
     const [mode, setMode] = useState('date');
@@ -19,7 +21,7 @@ const TaskDetails = () => {
     };
     const showMode = currentMode => {
         togglePicker(true);
-        setMode(currentMode);
+        setMode(currentMode);ƒ
     };
 
     const showDatepicker = () => {
@@ -52,20 +54,26 @@ const TaskDetails = () => {
 
             </View>
             <View style={styles.row}>
-                <Image source={Category} style={styles.icon} />
-                <Picker
-                    selectedValue={tag}
-                    mode={'dialog'}
-                    style={{ height: 50, width: 200, marginHorizontal: 20, backgroundColor: AppTheme.LightColors.secondary }}
-                    onValueChange={(itemValue, itemIndex) => { if (itemValue !== 'select') setTag(itemValue) }}
-                >
-                    <Picker.Item label="Select tag" value="select" />
-                    <Picker.Item label="Work" value="work" />
-                    <Picker.Item label="Home" value="home" />
-                    <Picker.Item label="Travel" value="travel" />
-                    <Picker.Item label="Study" value="study" />
-                    <Picker.Item label="Shopping" value="shopping" />
-                </Picker>
+            <Image source={Category} style={styles.icon} />
+            <TouchableOpacity>
+                    <>
+                        <Menu>
+                            <MenuTrigger>
+                                <Text style={styles.text}>Select Category</Text>
+                            </MenuTrigger>
+                            <MenuOptions>
+                                {
+                                    tags.map(
+                                        tag => <MenuOption key={tag}>
+                                            <Text style={styles.tag}>{tag}</Text>
+                                        </MenuOption>
+                                    )
+                                }
+                            </MenuOptions>
+                        </Menu>
+                    </>
+                </TouchableOpacity>
+                
             </View>
         </View>
     )
@@ -90,6 +98,11 @@ const styles = StyleSheet.create({
     },
     text: {
         marginHorizontal: 30
+    },
+    tag: {
+        fontSize: 18,
+        color: AppTheme.TextColors.sectionColor,
+        padding: 10
     }
 });
 
