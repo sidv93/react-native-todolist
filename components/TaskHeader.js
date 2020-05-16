@@ -39,7 +39,7 @@ const TaskHeader = ({ task }) => {
                     <Image source={sample} style={styles.taskIcon} />
                 </View>
                 <Text style={styles.taskHeader}>{'All'}</Text>
-                <Text style={styles.taskText}>{'23 tasks'}</Text>
+                <Text style={styles.taskText}>{`12 Tasks`}</Text>
             </View>
         </View>
     )
@@ -73,25 +73,28 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
     },
     iconContainer: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         backgroundColor: 'white',
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 20
+        marginTop: 20,
+        marginBottom: 10
+        
     },
 
     taskIcon: {
-        width: 34,
-        height: 34,
+        width: 30,
+        height: 30,
         resizeMode: 'contain',
         borderRadius: 50
     },
     taskHeader: {
         color: 'white',
-        fontSize: 36,
-        fontWeight: 'bold'
+        fontSize: 28,
+        fontWeight: 'bold',
+        textTransform: 'capitalize'
     },
     taskText: {
         color: 'white',

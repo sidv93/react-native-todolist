@@ -5,17 +5,17 @@ import TaskHeader from '../components/TaskHeader';
 import TaskList from '../components/TaskList';
 import AddButton from '../components/AddButton';
 import Constants from 'expo-constants';
+import { useRoute } from '@react-navigation/native';
+import TaskNavigation from '../components/TaskNavigation';
 
-import sampledata from '../sampleData';
-
-const tasks = [
-]
-
-const Tasks = ({ category }) => {
+const Tasks = () => {
+    const route = useRoute();
+    // const {task} = route.params;
     return (
         <View style={styles.container}>
             <TaskHeader />
-            <TaskList tasks={tasks} />
+            {/* <TaskList tasks={task.tasks} /> */}
+            <TaskNavigation />
             <AddButton />
         </View>
     )

@@ -7,13 +7,13 @@ import { useNavigation } from '@react-navigation/native';
 const Card = ({ card }) => {
     const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Tasks')}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Tasks', {task: card})}>
             <View style={styles.cardHeader}>
                 <Image source={card.icon} style={styles.cardIcon} />
             </View>
             <View style={styles.cardContent}>
-                <Text style={styles.cardName}>{card.title}</Text>
-                <Text style={styles.cardText}>{card.text}</Text>
+                <Text style={styles.cardName}>{card.name}</Text>
+                <Text style={styles.cardText}>{`${card.tasks.length} tasks`}</Text>
             </View>
         </TouchableOpacity>
     )

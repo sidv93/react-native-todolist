@@ -6,33 +6,23 @@ import CreateButton from '../components/CreateButton';
 import NewTaskHeader from '../components/NewTaskHeader';
 import AddTask from '../components/AddTask';
 import TaskDetails from '../components/TaskDetails';
+import storageApis from '../asyncstorageutil';
+import { useNavigation } from '@react-navigation/native';
 
 const NewTask = () => {
     const [title, setTitile] = useState('');
     const [description, setDescription] = useState('');
     const [dateTime, setDateTime] = useState();
     const [tag, setTag] = useState('');
+    const navigation = useNavigation();
     const onCreate = async () => {
         console.log('title', title, 'description', description, 'datetime', dateTime, 'tag', tag);
         console.log('creating new task');
         const newTask = {
             title, description, tag, dateTime
         };
-        try {
-            const existing = await AsyncStorage.getItem(tag);
-            console.log('existing', existing);
-            if (!existing) {
-                const newArr = [newTask];
-                await AsyncStorage.setItem(tag, JSON.stringify(newArr));
-            } else {
-                // await AsyncStorage.removeItem(tag);
-                const existingTasks = JSON.parse(existing);
-                existingTasks.push(newTask);
-                await AsyncStorage.setItem(tag, JSON.stringify(existingTasks));
-            }
-        } catch (e) {
-            console.log('error while async storage', e);
-        }
+        await storageApis.addNewTask(newTask);
+        navigation.goBack();
     };
 
     return (

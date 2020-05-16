@@ -7,7 +7,7 @@ import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-me
 import AppTheme from '../AppTheme';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const tags = ['Home', 'Work', 'Travel', 'Study', 'Shopping'];
+const tags = ['home', 'work', 'travel', 'study', 'shopping', 'music'];
 
 const TaskDetails = ({onDateTimeChange, onTagChange}) => {
     const [mode, setMode] = useState('date');
@@ -103,12 +103,14 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     text: {
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        textTransform: 'capitalize'
     },
     tag: {
         fontSize: 18,
         color: AppTheme.TextColors.sectionColor,
-        padding: 10
+        padding: 10,
+        textTransform: 'capitalize'
     }
 });
 

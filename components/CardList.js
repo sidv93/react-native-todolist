@@ -5,14 +5,6 @@ import Card from './Card';
 import HomeHeader from './HomeHeader';
 
 const CardList = ({ cards }) => {
-    useEffect(() => {
-        const getTasks = async () => {
-            const tasks = await AsyncStorage.getItem('Travel');
-            console.log('tasks', JSON.parse(tasks));
-        }
-        getTasks();
-    })
-    
     return (
         <SafeAreaView style={styles.container}>
             <FlatList numColumns={2} ListHeaderComponent={HomeHeader} showsVerticalScrollIndicator={false}

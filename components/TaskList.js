@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, SectionList, SafeAreaView, Text } from 'react-native';
 import AppTheme from '../AppTheme';
 import Task from './Task';
 
 const TaskList = ({ tasks }) => {
+    const [taskList, setTasks] = useState([]);
+    useEffect(() => {
+        const sectionTasks = [
+            {
+                title: 'late',
+                data: tasks.filter(item => {
+                    const current = new Date();
+                    const taskTime = new Date(item.dateTime);
+                    
+                })
+            }
+        ]
+    }, [tasks]);
     return (
         <SafeAreaView style={styles.container}>
             <SectionList
@@ -31,7 +44,8 @@ const styles = StyleSheet.create({
     header: {
         color: AppTheme.TextColors.sectionColor,
         fontSize: 18,
-        marginVertical: 10
+        marginVertical: 10,
+        textTransform: 'capitalize'
     }
 });
 

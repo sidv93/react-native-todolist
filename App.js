@@ -8,6 +8,10 @@ import Home from './screens/Home';
 import Tasks from './screens/Tasks';
 import NewTask from './screens/NewTask';
 import { MenuProvider } from 'react-native-popup-menu';
+import storageApis from './asyncstorageutil';
+import taskStore from './store/tasks';
+
+storageApis.constructTasksDS();
 
 const Stack = createStackNavigator();
 
@@ -15,7 +19,7 @@ export default function App() {
   return (
     <MenuProvider>
       <NavigationContainer>
-        <Stack.Navigator headerMode={'none'} initialRouteName={"Home"} mode={'modal'}>
+        <Stack.Navigator headerMode={'none'} initialRouteName={"Tasks"} mode={'modal'}>
           <Stack.Screen name="Home" component={Home} options={{
             transitionSpec: {
               open: config,
