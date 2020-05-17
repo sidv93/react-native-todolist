@@ -6,6 +6,7 @@ import OptionsButton from '../assets/icons/options.png';
 import { useNavigation } from '@react-navigation/native';
 import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu';
 import TaskStore from '../store/tasks';
+import { observer } from 'mobx-react';
 
 const options = ['Delete all', 'Mark all read', 'Exit'];
 
@@ -108,4 +109,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TaskHeader;
+export default observer(TaskHeader);

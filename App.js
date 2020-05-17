@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Constants from 'expo-constants';
@@ -11,6 +11,7 @@ import { MenuProvider } from 'react-native-popup-menu';
 import TaskStore from './store/tasks';
 import ErrorBoundary from 'react-native-error-boundary';
 import 'mobx-react-lite/batchingForReactNative';
+import Spinner from './components/Spinner';
 
 const Stack = createStackNavigator();
 
@@ -25,11 +26,7 @@ export default function App() {
   });
 
   if (loading) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ fontSize: 18 }}>Loading</Text>
-      </View>
-    )
+    return <Spinner />
   } else {
     return (
       <ErrorBoundary FallbackComponent={CustomFallback}>
@@ -63,7 +60,7 @@ export default function App() {
 }
 
 const CustomFallback = ({ error, resetError }) => (
-  <View>
+  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
     <Text>Something happened!</Text>
     <Text>{error.toString()}</Text>
     <Button onPress={resetError} title={'Try again'} />

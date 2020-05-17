@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import AppTheme from '../AppTheme';
+import { observer } from 'mobx-react';
 
 const Task = ({ task }) => {
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    const [toggleCheckBox, setToggleCheckBox] = useState(false);
+    const onToggle = () => {
+        setToggleCheckBox(toggleCheckBox ? false: true);
+        task.toggleCompleted();
+    }
     return (
         <View style={styles.container}>
             <View style={styles.textContainer}>
@@ -13,8 +18,8 @@ const Task = ({ task }) => {
             </View>
             <CheckBox
                 value={toggleCheckBox}
-                onValueChange={() => toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)}
-                tintColors={{true: AppTheme.TextColors.sectionColor, false: AppTheme.TextColors.sectionColor}}
+                onValueChange={onToggle}
+                tintColors={{true: AppTheme.LightColors.primary, false: AppTheme.LightColors.primary}}
             />
         </View>
     )
@@ -39,4 +44,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Task;
+export default observer(Task);

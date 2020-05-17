@@ -26,7 +26,7 @@ const TaskDetails = ({onDateTimeChange, onTagChange}) => {
     }
     const showMode = currentMode => {
         togglePicker(true);
-        setMode(currentMode);ƒ
+        setMode(currentMode);
     };
 
     const showDatepicker = () => {
@@ -56,7 +56,6 @@ const TaskDetails = ({onDateTimeChange, onTagChange}) => {
                         onChange={onChange}
                     />
                 )}
-
             </View>
             <View style={styles.row}>
             <Image source={Category} style={styles.icon} />

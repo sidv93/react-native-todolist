@@ -3,10 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AppTheme from '../AppTheme';
 import TaskList from './TaskList';
+import TaskStore from '../store/tasks';
+import { observer } from 'mobx-react';
 
 const Tab = createMaterialTopTabNavigator();
 
-const TaskNavigation = () => {
+const TaskNavigation = ({ tag }) => {
+
+    const elapsed = TaskStore.getElapsedTasksForTag(tag.tag);
+    const today = TaskStore.getTodayTasksForTag(tag.tag);
+    const upcoming = TaskStore.getUpcomingTasksForTag(tag.tag);
     return (
         <View style={styles.container}>
             <Tab.Navigator style={styles.navigator} tabBarOptions={{
@@ -15,9 +21,9 @@ const TaskNavigation = () => {
                 labelStyle: styles.label,
                 style: styles.topBar
             }}>
-                <Tab.Screen name="Elapsed" children={() => <TaskList tasks={[]} />} />
-                <Tab.Screen name="Today" children={() => <TaskList tasks={[]} />} />
-                <Tab.Screen name="Upcoming" children={() => <TaskList tasks={[]} />} />
+                <Tab.Screen name="Elapsed" children={() => <TaskList tasks={elapsed} />} />
+                <Tab.Screen name="Today" children={() => <TaskList tasks={today} />} />
+                <Tab.Screen name="Upcoming" children={() => <TaskList tasks={upcoming} />} />
             </Tab.Navigator>
         </View>
     )
@@ -47,4 +53,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TaskNavigation;
+export default observer(TaskNavigation);

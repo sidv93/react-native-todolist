@@ -1,16 +1,20 @@
-import React from 'react';
-import { StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, FlatList, SafeAreaView, Text } from 'react-native';
 import AppTheme from '../AppTheme';
 import Task from './Task';
+import EmptyTasks from './EmptyTasks';
+import { observer } from 'mobx-react';
 
 const TaskList = ({ tasks }) => {
-    return (
-        <SafeAreaView style={styles.container}>
-            <FlatList
-                keyExtractor={(item, index) => String(index)} removeClippedSubviews={true} data={tasks}
-                renderItem={({ item }) => <Task task={item} />} />
-        </SafeAreaView>
-    )
+    if (tasks.length > 0) {
+        return (
+            <SafeAreaView style={styles.container}>
+                <FlatList keyExtractor={(item, index) => String(index)} removeClippedSubviews={true} 
+                showsVerticalScrollIndicator={false} data={tasks} renderItem={({ item }) => <Task task={item} />} />
+            </SafeAreaView>
+        )
+    }
+    return <EmptyTasks />
 };
 
 const styles = StyleSheet.create({
@@ -28,4 +32,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TaskList;
+export default observer(TaskList);

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppTheme from '../AppTheme';
 import TaskHeader from '../components/TaskHeader';
-import TaskList from '../components/TaskList';
 import AddButton from '../components/AddButton';
 import Constants from 'expo-constants';
 import { useRoute } from '@react-navigation/native';
@@ -14,7 +13,7 @@ const Tasks = () => {
     return (
         <View style={styles.container}>
             <TaskHeader task={task} />
-            <TaskNavigation />
+            <TaskNavigation  tag={task} />
             <AddButton />
         </View>
     )

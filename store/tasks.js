@@ -1,11 +1,14 @@
 import { types, flow } from 'mobx-state-tree';
 import { AsyncStorage } from 'react-native';
+import isBefore from 'date-fns/isBefore';
+import isEqual from 'date-fns/isEqual';
+import isAfter from 'date-fns/isAfter';
 
 const Task = types.model('Task', {
     id: types.number,
     title: types.string,
     description: types.string,
-    timestamp: types.optional(types.undefined || types.Date),
+    timestamp: types.Date,
     completed: false,
     tag: types.string
 })
@@ -18,11 +21,54 @@ const Task = types.model('Task', {
 const TaskStore = types.model('Tasks', {
     tasks: types.array(Task),
 })
-.views(self => ({
-    taskLengthOfTag(tag) {
-        return tag !== 'all' ? self.tasks.filter(task => task.tag === tag).length : self.tasks.length;
-    }
-}))
+    .views(self => ({
+        taskLengthOfTag(tag) {
+            return tag !== 'all' ? self.tasks.filter(task => task.tag === tag).length : self.tasks.length;
+        },
+        getTasksByTag(tag) {
+            return tag === 'all' ? self.tasks : self.tasks.filter(item => item.tag === tag);
+        },
+        getElapsedTasksForTag(tag) {
+            console.log('in elapsed', tag);
+            return self.getTasksByTag(tag).filter(item => {
+                if (item.timestamp) {
+                    const currDate = new Date();
+                    const taskDate = new Date(item.timestamp);
+                    return isBefore(
+                        new Date(taskDate.getFullYear(), taskDate.getMonth(), taskDate.getDate()),
+                        new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate())
+                    )
+                }
+                return false;
+            });
+        },
+        getTodayTasksForTag(tag) {
+            return self.getTasksByTag(tag).filter(item => {
+                if (item.timestamp) {
+                    const currDate = new Date();
+                    const taskDate = new Date(item.timestamp);
+                    return isEqual(
+                        new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate()),
+                        new Date(taskDate.getFullYear(), taskDate.getMonth(), taskDate.getDate())
+                    )
+                }
+                return false;
+            });
+        },
+        getUpcomingTasksForTag(tag) {
+            return self.getTasksByTag(tag).filter(item => {
+                if (item.timestamp) {
+                    const currDate = new Date();
+                    const taskDate = new Date(item.timestamp);
+                    return isAfter(
+                        new Date(taskDate.getFullYear(), taskDate.getMonth(), taskDate.getDate()),
+                        new Date(currDate.getFullYear(), currDate.getMonth(), currDate.getDate())
+                    )
+                }
+                return false;
+            });
+        }
+    }))
     .actions(self => ({
         addTask: flow(function* addTask(task) {
             const newTask = { ...task, id: self.tasks.length + 1 };
@@ -30,9 +76,9 @@ const TaskStore = types.model('Tasks', {
                 const res = yield AsyncStorage.setItem('tasks', JSON.stringify([...self.tasks, newTask]));
                 console.log('new task saved');
                 self.tasks.push(newTask);
-            } catch(e) {
+            } catch (e) {
                 console.log('error when saving task', e);
-            }           
+            }
         }),
 
         loadTasks: flow(function* loadTasks() {
@@ -40,6 +86,9 @@ const TaskStore = types.model('Tasks', {
                 const json = yield AsyncStorage.getItem('tasks');
                 const tasks = JSON.parse(json);
                 if (tasks) {
+                    tasks.forEach(item => {
+                        item.timestamp = new Date();
+                    })
                     self.tasks = [...tasks];
                 }
             } catch (err) {
