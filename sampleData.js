@@ -1,167 +1,32 @@
-const sampleData = {
-    categories: [
-        {
-            title: 'work',
-            icon: require('./assets/icons/work.png'),
-            text: '23 tasks'
-        },
-        {
-            title: 'home',
-            icon: require('./assets/icons/home.png'),
-            text: '2 tasks'
-        },
-        {
-            title: 'travel',
-            icon: require('./assets/icons/travel.png'),
-            text: '12 tasks'
-        },
-        {
-            title: 'study',
-            icon: require('./assets/icons/study.png'),
-            text: '33 tasks'
-        },
-        {
-            title: 'shopping',
-            icon: require('./assets/icons/shopping.png'),
-            text: '19 tasks'
-        },
-        {
-            title: 'all',
-            icon: require('./assets/icons/alltasks.png'),
-            text: '20 tasks'
-        },
-        {
-            title: 'study',
-            icon: require('./assets/icons/study.png'),
-            text: '3 tasks'
-        },
-        {
-            title: 'shopping',
-            icon: require('./assets/icons/shopping.png'),
-            text: '7 tasks'
-        },
-        {
-            title: 'all',
-            icon: require('./assets/icons/alltasks.png'),
-            text: '23 tasks'
-        }
-    ],
-    tasks: [
-        {
-            category: 'work',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'work',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'work',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'work',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'home',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'home',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'home',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'home',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'travel',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'travel',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'travel',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'study',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'study',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'study',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'study',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'shopping',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'shopping',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'shopping',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        },
-        {
-            category: 'shopping',
-            title: 'Finish login screen',
-            timestamp: '1589291281',
-            done: false,
-        }
-    ]
-};
+const initialTaskState = [
+    {
+        tag: 'all',
+        icon: require('./assets/icons/alltasks.png'),
+    },
+    {
+        tag: 'work',
+        icon: require('./assets/icons/work.png'),
+    },
+    {
+        tag: 'home',
+        icon: require('./assets/icons/home.png'),
+    },
+    {
+        tag: 'shopping',
+        icon: require('./assets/icons/shopping.png'),
+    },
+    {
+        tag: 'music',
+        icon: require('./assets/icons/music.png'),
+    },
+    {
+        tag: 'travel',
+        icon: require('./assets/icons/travel.png'),
+    },
+    {
+        tag: 'study',
+        icon: require('./assets/icons/study.png'),
+    }
+];
 
-export default sampleData;
+export default initialTaskState;

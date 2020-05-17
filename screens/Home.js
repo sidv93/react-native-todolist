@@ -1,18 +1,36 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, AsyncStorage } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, SafeAreaView, Text } from 'react-native';
 import AppTheme from '../AppTheme';
 import CardList from '../components/CardList';
 import AddButton from '../components/AddButton';
 import Constants from 'expo-constants';
+import TaskStore from '../store/tasks';
+import { observer } from 'mobx-react';
 
-const Home = () => {
-    return (
-        <SafeAreaView style={styles.container}>
-            <CardList cards={[]} />
-            <AddButton />
-        </SafeAreaView>
-    )
+class Home extends React.Component {
+    render() {
+        const { tasks } = TaskStore;
+        console.log('tasks in home', tasks.length);
+        return (
+            <SafeAreaView style={styles.container}>
+                <CardList cards={tasks} />
+                {/* <Text>{`${allTasks.length} tasks`}</Text> */}
+                <AddButton />
+            </SafeAreaView>
+        )
+    }
 }
+// const Home = () => {
+//     const { tasks } = TaskStore; 
+//     console.log('task store', TaskStore);
+//     console.log('tasks from home', tasks);
+//     return (
+//         <SafeAreaView style={styles.container}>
+//             <CardList cards={tasks} />
+//             <AddButton />
+//         </SafeAreaView>
+//     )
+// }
 
 const styles = StyleSheet.create({
     container: {
@@ -24,4 +42,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Home;
+export default observer(Home);

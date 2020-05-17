@@ -8,6 +8,7 @@ import AddTask from '../components/AddTask';
 import TaskDetails from '../components/TaskDetails';
 import storageApis from '../asyncstorageutil';
 import { useNavigation } from '@react-navigation/native';
+import TaskStore from '../store/tasks';
 
 const NewTask = () => {
     const [title, setTitile] = useState('');
@@ -15,14 +16,16 @@ const NewTask = () => {
     const [dateTime, setDateTime] = useState();
     const [tag, setTag] = useState('');
     const navigation = useNavigation();
-    const onCreate = async () => {
+    const onCreate = () => {
         console.log('title', title, 'description', description, 'datetime', dateTime, 'tag', tag);
         console.log('creating new task');
         const newTask = {
-            title, description, tag, dateTime
+            title, description, tag, timestamp: dateTime
         };
-        await storageApis.addNewTask(newTask);
-        navigation.goBack();
+        TaskStore.addTask(newTask)
+        .then(() => {
+            navigation.goBack();
+        });
     };
 
     return (

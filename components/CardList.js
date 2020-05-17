@@ -3,13 +3,15 @@ import { StyleSheet, FlatList, SafeAreaView, AsyncStorage } from 'react-native';
 import AppTheme from '../AppTheme';
 import Card from './Card';
 import HomeHeader from './HomeHeader';
+import { observer } from 'mobx-react';
+import cardList from '../sampleData';
 
 const CardList = ({ cards }) => {
     return (
         <SafeAreaView style={styles.container}>
             <FlatList numColumns={2} ListHeaderComponent={HomeHeader} showsVerticalScrollIndicator={false}
-                keyExtractor={(item, index) => String(index)} removeClippedSubviews={true} data={cards}
-                renderItem={({ item }) => <Card card={item} />} />
+                keyExtractor={(item, index) => String(index)} removeClippedSubviews={true} data={cardList}
+                renderItem={({ item }) => <Card card={item} tasks={cards} />} />
         </SafeAreaView>
     )
 };
@@ -22,4 +24,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CardList;
+export default observer(CardList);

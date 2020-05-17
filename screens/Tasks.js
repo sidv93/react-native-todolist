@@ -10,11 +10,10 @@ import TaskNavigation from '../components/TaskNavigation';
 
 const Tasks = () => {
     const route = useRoute();
-    // const {task} = route.params;
+    const {task} = route.params;
     return (
         <View style={styles.container}>
-            <TaskHeader />
-            {/* <TaskList tasks={task.tasks} /> */}
+            <TaskHeader task={task} />
             <TaskNavigation />
             <AddButton />
         </View>

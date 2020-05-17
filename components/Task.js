@@ -9,7 +9,7 @@ const Task = ({ task }) => {
         <View style={styles.container}>
             <View style={styles.textContainer}>
                 <Text style={styles.taskName}>{task.title}</Text>
-                <Text style={styles.taskDate}>{task.timestamp}</Text>
+                <Text style={styles.taskDate}>{task.timestamp.getMonth()}</Text>
             </View>
             <CheckBox
                 value={toggleCheckBox}

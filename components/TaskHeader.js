@@ -3,9 +3,9 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import AppTheme from '../AppTheme';
 import BackButton from '../assets/icons/back.png';
 import OptionsButton from '../assets/icons/options.png';
-import sample from '../assets/icons/art.png';
 import { useNavigation } from '@react-navigation/native';
 import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu';
+import TaskStore from '../store/tasks';
 
 const options = ['Delete all', 'Mark all read', 'Exit'];
 
@@ -36,10 +36,10 @@ const TaskHeader = ({ task }) => {
             </View>
             <View style={styles.contentContainer}>
                 <View style={styles.iconContainer}>
-                    <Image source={sample} style={styles.taskIcon} />
+                    <Image source={task.icon} style={styles.taskIcon} />
                 </View>
-                <Text style={styles.taskHeader}>{'All'}</Text>
-                <Text style={styles.taskText}>{`12 Tasks`}</Text>
+                <Text style={styles.taskHeader}>{task.tag}</Text>
+                <Text style={styles.taskText}>{`${TaskStore.taskLengthOfTag(task.tag)} Tasks`}</Text>
             </View>
         </View>
     )

@@ -1,29 +1,23 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import AppTheme from '../AppTheme';
+import TaskList from './TaskList';
 
 const Tab = createMaterialTopTabNavigator();
 
 const TaskNavigation = () => {
     return (
         <View style={styles.container}>
-            <Tab.Navigator style={{ paddingTop: 35 }} tabBarOptions={{
+            <Tab.Navigator style={styles.navigator} tabBarOptions={{
                 activeTintColor: AppTheme.LightColors.primary,
-                indicatorStyle: {
-                    backgroundColor: AppTheme.LightColors.primary
-                },
-                labelStyle: {
-                    textTransform: 'capitalize',
-                    fontSize: 16
-                },
-                style: {
-                    elevation: 0
-                }
+                indicatorStyle: styles.indicator,
+                labelStyle: styles.label,
+                style: styles.topBar
             }}>
-                <Tab.Screen name="Recent" children={() => <Text> Hello</Text>} />
-                <Tab.Screen name="Old" children={() =>  <Text> Hello</Text>} />
-                <Tab.Screen name="Favourites" children={() =>  <Text> Hello</Text>} />
+                <Tab.Screen name="Elapsed" children={() => <TaskList tasks={[]} />} />
+                <Tab.Screen name="Today" children={() => <TaskList tasks={[]} />} />
+                <Tab.Screen name="Upcoming" children={() => <TaskList tasks={[]} />} />
             </Tab.Navigator>
         </View>
     )
@@ -37,6 +31,19 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         marginTop: 15
+    },
+    navigator: {
+        paddingTop: 35
+    },
+    indicator: {
+        backgroundColor: AppTheme.LightColors.primary
+    },
+    label: {
+        textTransform: 'capitalize',
+        fontSize: 16
+    },
+    topBar: {
+        elevation: 0
     }
 });
 
