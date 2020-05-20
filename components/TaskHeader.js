@@ -4,14 +4,19 @@ import AppTheme from '../AppTheme';
 import BackButton from '../assets/icons/back.png';
 import OptionsButton from '../assets/icons/options.png';
 import { useNavigation } from '@react-navigation/native';
-import { Menu, MenuOptions, MenuOption, MenuTrigger} from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import TaskStore from '../store/tasks';
 import { observer } from 'mobx-react';
 
-const options = ['Delete all', 'Mark all read', 'Exit'];
 
 const TaskHeader = ({ task }) => {
     const navigation = useNavigation();
+    const markAllDone = () => {
+        TaskStore.getTodayTasksForTag(task.tag).forEach(item => item.toggleCompleted());
+    }
+    const deleteAll = () => {
+        TaskStore.getTodayTasksForTag(task.tag).forEach(item => TaskStore.removeTask(item));
+    }
     return (
         <View style={styles.container}>
             <View style={styles.optionsContainer}>
@@ -25,11 +30,12 @@ const TaskHeader = ({ task }) => {
                                 <Image source={OptionsButton} style={styles.options} />
                             </MenuTrigger>
                             <MenuOptions>
-                                {
-                                    options.map(option =><MenuOption key={option}>
-                                        <Text style={styles.optionsDropdown}>{option}</Text>
-                                    </MenuOption>)
-                                }
+                                <MenuOption onSelect={(markAllDone)}>
+                                    <Text style={styles.optionsDropdown}>Mark all as Done</Text>
+                                </MenuOption>
+                                <MenuOption onSelect={(deleteAll)}>
+                                    <Text style={styles.optionsDropdown}>Delete all</Text>
+                                </MenuOption>
                             </MenuOptions>
                         </Menu>
                     </>
@@ -82,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 20,
         marginBottom: 10
-        
+
     },
 
     taskIcon: {

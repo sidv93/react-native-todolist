@@ -6,37 +6,45 @@ import CreateButton from '../components/CreateButton';
 import NewTaskHeader from '../components/NewTaskHeader';
 import AddTask from '../components/AddTask';
 import TaskDetails from '../components/TaskDetails';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import TaskStore from '../store/tasks';
 
-const NewTask = () => {
-    const [title, setTitile] = useState('');
-    const [description, setDescription] = useState('');
-    const [dateTime, setDateTime] = useState();
-    const [tag, setTag] = useState('');
+const EditTask = () => {
+    const route = useRoute();
+    const {taskId} = route.params;
+    const task = TaskStore.getTaskById(taskId);
+    const [title, setTitile] = useState(task.title);
+    const [description, setDescription] = useState(task.description);
+    const [dateTime, setDateTime] = useState(task.timestamp);
+    const [tag, setTag] = useState(task.tag);
     const navigation = useNavigation();
-    const onCreate = () => {
-        const newTask = {
-            title, description, tag, timestamp: dateTime
-        };
-        TaskStore.addTask(newTask)
-        .then(() => {
+    const onEdit = () => {
+        // const newTask = {
+        //     title, description, tag, timestamp: dateTime
+        // };
+        // TaskStore.addTask(newTask)
+        // .then(() => {
+            task.setEditDetails({tag, description, timestamp: dateTime});
             navigation.goBack();
-        });
+        // });
     };
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={'height'}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={{ flex: 1 }}>
-                    <NewTaskHeader />
+                    <NewTaskHeader edit={true} task={task} />
                     <AddTask
+                        edit={true}
+                        task={task}
                         onTitleChange={setTitile}
                         onDescriptionChange={setDescription} />
                     <TaskDetails
+                        edit={true}
+                        task={task}
                         onDateTimeChange={setDateTime}
                         onTagChange={setTag} />
-                    <CreateButton onCreate={onCreate} />
+                    <CreateButton edit={true} onCreate={onEdit} />
                 </View>
             </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -52,4 +60,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NewTask;
+export default EditTask;

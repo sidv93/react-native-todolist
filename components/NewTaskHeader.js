@@ -1,15 +1,33 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import CloseIcon from '../assets/icons/close.png';
+import { MaterialIcons } from '@expo/vector-icons';
+import AppTheme from '../AppTheme';
+import TaskStore from '../store/tasks';
 
-const NewTaskHeader = () => {
+const NewTaskHeader = ({ edit, task }) => {
     const navigation = useNavigation();
+    const deleteTask = () => {
+        TaskStore.removeTask(task);
+    }
+    const onIconPress = () => {
+        if (edit) {
+            deleteTask();
+        }
+        navigation.goBack();
+    }
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>New Task</Text>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Image source={CloseIcon} style={styles.closeIcon} />
+            <Text style={styles.title}>{edit ? 'Edit Task' : 'New Task'}</Text>
+            <TouchableOpacity onPress={onIconPress}>
+                {
+                    edit ?
+                        <MaterialIcons name="delete" size={29} color={AppTheme.TextColors.sectionColor}
+                            onPress={deleteTask}
+                            style={styles.deleteIcon} /> :
+                        <Image source={CloseIcon} style={styles.closeIcon} />
+                }
             </TouchableOpacity>
         </View>
     )

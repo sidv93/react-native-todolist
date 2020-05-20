@@ -12,6 +12,7 @@ import TaskStore from './store/tasks';
 import ErrorBoundary from 'react-native-error-boundary';
 import 'mobx-react-lite/batchingForReactNative';
 import Spinner from './components/Spinner';
+import EditTask from './screens/EditTask';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,12 @@ export default function App() {
                   close: config,
                 },
               }} />
+              <Stack.Screen name="EditTask" component={EditTask} options={{
+                transitionSpec: {
+                  open: config,
+                  close: config,
+                },
+              }} />
             </Stack.Navigator>
           </NavigationContainer>
         </MenuProvider>
@@ -60,7 +67,7 @@ export default function App() {
 }
 
 const CustomFallback = ({ error, resetError }) => (
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Something happened!</Text>
     <Text>{error.toString()}</Text>
     <Button onPress={resetError} title={'Try again'} />

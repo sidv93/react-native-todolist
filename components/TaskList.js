@@ -5,12 +5,12 @@ import Task from './Task';
 import EmptyTasks from './EmptyTasks';
 import { observer } from 'mobx-react';
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, type }) => {
     if (tasks.length > 0) {
         return (
             <SafeAreaView style={styles.container}>
                 <FlatList keyExtractor={(item, index) => String(index)} removeClippedSubviews={true} 
-                showsVerticalScrollIndicator={false} data={tasks} renderItem={({ item }) => <Task task={item} />} />
+                showsVerticalScrollIndicator={false} data={tasks} renderItem={({ item }) => <Task type={type} task={item} />} />
             </SafeAreaView>
         )
     }

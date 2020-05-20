@@ -1,4 +1,4 @@
-import { types, flow } from 'mobx-state-tree';
+import { types, flow, destroy } from 'mobx-state-tree';
 import { AsyncStorage } from 'react-native';
 import isBefore from 'date-fns/isBefore';
 import isEqual from 'date-fns/isEqual';
@@ -15,6 +15,11 @@ const Task = types.model('Task', {
     .actions(self => ({
         toggleCompleted() {
             self.completed = !self.completed;
+        },
+        setEditDetails({description, timestamp, tag}) {
+            self.description = description;
+            self.timestamp = timestamp;
+            self.tag = tag;
         }
     }))
 
@@ -29,7 +34,6 @@ const TaskStore = types.model('Tasks', {
             return tag === 'all' ? self.tasks : self.tasks.filter(item => item.tag === tag);
         },
         getElapsedTasksForTag(tag) {
-            console.log('in elapsed', tag);
             return self.getTasksByTag(tag).filter(item => {
                 if (item.timestamp) {
                     const currDate = new Date();
@@ -67,6 +71,9 @@ const TaskStore = types.model('Tasks', {
                 }
                 return false;
             });
+        },
+        getTaskById(id) {
+            return self.tasks.find(item => item.id === id);
         }
     }))
     .actions(self => ({
@@ -74,7 +81,15 @@ const TaskStore = types.model('Tasks', {
             const newTask = { ...task, id: self.tasks.length + 1 };
             try {
                 const res = yield AsyncStorage.setItem('tasks', JSON.stringify([...self.tasks, newTask]));
-                console.log('new task saved');
+                self.tasks.push(newTask);
+            } catch (e) {
+                console.log('error when saving task', e);
+            }
+        }),
+
+        editTask: flow(function* editTask(task) {
+            try {
+                const res = yield AsyncStorage.setItem('tasks', JSON.stringify([...self.tasks, newTask]));
                 self.tasks.push(newTask);
             } catch (e) {
                 console.log('error when saving task', e);
@@ -94,7 +109,11 @@ const TaskStore = types.model('Tasks', {
             } catch (err) {
                 console.error("Failed to load tasks ", err)
             }
-        })
+        }),
+
+        removeTask(task) {
+            destroy(task);
+        }
     }))
     .create({
         tasks: [],

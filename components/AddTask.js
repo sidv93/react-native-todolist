@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import AppTheme from '../AppTheme';
 
-const AddTask = ({onTitleChange, onDescriptionChange}) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+const AddTask = ({onTitleChange, onDescriptionChange, edit, task}) => {
+    const [title, setTitle] = useState((task && task.title) || '');
+    const [description, setDescription] = useState((task && task.description) || '');
     const onChangeTitle = (value) => {
         setTitle(value);
         onTitleChange(value);
@@ -22,6 +22,7 @@ const AddTask = ({onTitleChange, onDescriptionChange}) => {
                 style={styles.taskTitle}
                 onChangeText={onChangeTitle}
                 value={title}
+                editable={edit ? false : true}
             />
             <Text style={styles.label}>What are you planning?</Text>
             <TextInput

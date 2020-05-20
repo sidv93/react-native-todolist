@@ -7,21 +7,8 @@ import Constants from 'expo-constants';
 import TaskStore from '../store/tasks';
 import { observer } from 'mobx-react';
 
-// class Home extends React.Component {
-//     render() {
-//         const { tasks } = TaskStore;
-//         console.log('tasks in home', tasks.length);
-//         return (
-//             <SafeAreaView style={styles.container}>
-//                 <CardList cards={tasks} />
-//                 <AddButton />
-//             </SafeAreaView>
-//         )
-//     }
-// }
 const Home = () => {
     const { tasks } = TaskStore;
-    console.log('tasks in home', tasks.length);
     return (
         <SafeAreaView style={styles.container}>
             <CardList cards={tasks} />

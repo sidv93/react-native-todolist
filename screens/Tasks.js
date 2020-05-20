@@ -6,6 +6,7 @@ import AddButton from '../components/AddButton';
 import Constants from 'expo-constants';
 import { useRoute } from '@react-navigation/native';
 import TaskNavigation from '../components/TaskNavigation';
+import { observer } from 'mobx-react';
 
 const Tasks = () => {
     const route = useRoute();
@@ -27,4 +28,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Tasks;
+export default observer(Tasks);
