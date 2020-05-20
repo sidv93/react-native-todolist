@@ -8,12 +8,9 @@ import TaskStore from '../store/tasks';
 
 const NewTaskHeader = ({ edit, task }) => {
     const navigation = useNavigation();
-    const deleteTask = () => {
-        TaskStore.removeTask(task);
-    }
     const onIconPress = () => {
         if (edit) {
-            deleteTask();
+            TaskStore.removeTask(task);
         }
         navigation.goBack();
     }
@@ -24,7 +21,6 @@ const NewTaskHeader = ({ edit, task }) => {
                 {
                     edit ?
                         <MaterialIcons name="delete" size={29} color={AppTheme.TextColors.sectionColor}
-                            onPress={deleteTask}
                             style={styles.deleteIcon} /> :
                         <Image source={CloseIcon} style={styles.closeIcon} />
                 }

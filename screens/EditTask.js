@@ -8,10 +8,11 @@ import AddTask from '../components/AddTask';
 import TaskDetails from '../components/TaskDetails';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import TaskStore from '../store/tasks';
+import DeleteTask from '../components/DeleteTask';
 
 const EditTask = () => {
     const route = useRoute();
-    const {taskId} = route.params;
+    const { taskId } = route.params;
     const task = TaskStore.getTaskById(taskId);
     const [title, setTitile] = useState(task.title);
     const [description, setDescription] = useState(task.description);
@@ -19,14 +20,8 @@ const EditTask = () => {
     const [tag, setTag] = useState(task.tag);
     const navigation = useNavigation();
     const onEdit = () => {
-        // const newTask = {
-        //     title, description, tag, timestamp: dateTime
-        // };
-        // TaskStore.addTask(newTask)
-        // .then(() => {
-            task.setEditDetails({tag, description, timestamp: dateTime});
-            navigation.goBack();
-        // });
+        task.setEditDetails({ tag, description, timestamp: dateTime });
+        navigation.goBack();
     };
 
     return (
@@ -44,6 +39,7 @@ const EditTask = () => {
                         task={task}
                         onDateTimeChange={setDateTime}
                         onTagChange={setTag} />
+                        
                     <CreateButton edit={true} onCreate={onEdit} />
                 </View>
             </TouchableWithoutFeedback>

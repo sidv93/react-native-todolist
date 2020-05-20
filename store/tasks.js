@@ -16,7 +16,7 @@ const Task = types.model('Task', {
         toggleCompleted() {
             self.completed = !self.completed;
         },
-        setEditDetails({description, timestamp, tag}) {
+        setEditDetails({ description, timestamp, tag }) {
             self.description = description;
             self.timestamp = timestamp;
             self.tag = tag;
@@ -79,21 +79,7 @@ const TaskStore = types.model('Tasks', {
     .actions(self => ({
         addTask: flow(function* addTask(task) {
             const newTask = { ...task, id: self.tasks.length + 1 };
-            try {
-                const res = yield AsyncStorage.setItem('tasks', JSON.stringify([...self.tasks, newTask]));
-                self.tasks.push(newTask);
-            } catch (e) {
-                console.log('error when saving task', e);
-            }
-        }),
-
-        editTask: flow(function* editTask(task) {
-            try {
-                const res = yield AsyncStorage.setItem('tasks', JSON.stringify([...self.tasks, newTask]));
-                self.tasks.push(newTask);
-            } catch (e) {
-                console.log('error when saving task', e);
-            }
+            self.tasks.push(newTask);
         }),
 
         loadTasks: flow(function* loadTasks() {
@@ -101,13 +87,18 @@ const TaskStore = types.model('Tasks', {
                 const json = yield AsyncStorage.getItem('tasks');
                 const tasks = JSON.parse(json);
                 if (tasks) {
-                    tasks.forEach(item => {
-                        item.timestamp = new Date();
-                    })
                     self.tasks = [...tasks];
                 }
             } catch (err) {
                 console.error("Failed to load tasks ", err)
+            }
+        }),
+
+        saveTasks: flow(function* saveTasks() {
+            try {
+                const res = yield AsyncStorage.setItem('tasks', JSON.stringify([...self.tasks]));
+            } catch (e) {
+                console.log('error when saving task', e);
             }
         }),
 

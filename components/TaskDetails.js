@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 20,
         marginHorizontal: 20,
-        flex: 1
+        flex: 1,
     },
     row: {
         flexDirection: 'row',
