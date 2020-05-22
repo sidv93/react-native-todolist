@@ -17,6 +17,12 @@ const Task = ({ task, type }) => {
     const deleteTask = () => {
         TaskStore.removeTask(task);
     }
+    const twoDigitDateTime = (input) => {
+        if(input < 10) {
+            return `0${input}`;
+        }
+        return input;
+    }
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('EditTask', {taskId: task.id})}>
             <View style={styles.textContainer}>
@@ -24,8 +30,8 @@ const Task = ({ task, type }) => {
                 <Text style={[styles.taskDate, { color: type === 'elapsed' ? AppTheme.TextColors.taskLateColor : AppTheme.TextColors.taskTimeColor }]}>
                     {
                         type === 'today' ?
-                            `${task.timestamp.getHours()}:${task.timestamp.getMinutes()}` :
-                            `${task.timestamp.getHours()}:${task.timestamp.getMinutes()} ${months[task.timestamp.getMonth()]} ${task.timestamp.getDate()}`
+                            `${twoDigitDateTime(task.timestamp.getHours())}:${twoDigitDateTime(task.timestamp.getMinutes())}` :
+                            `${twoDigitDateTime(task.timestamp.getHours())}:${twoDigitDateTime(task.timestamp.getMinutes())} ${months[task.timestamp.getMonth()]} ${task.timestamp.getDate()}`
                     }
                 </Text>
             </View>

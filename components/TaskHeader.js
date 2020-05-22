@@ -12,10 +12,10 @@ import { observer } from 'mobx-react';
 const TaskHeader = ({ task }) => {
     const navigation = useNavigation();
     const markAllDone = () => {
-        TaskStore.getTodayTasksForTag(task.tag).forEach(item => item.toggleCompleted());
+        TaskStore.getTasksByTag(task.tag).forEach(item => item.toggleCompleted());
     }
     const deleteAll = () => {
-        TaskStore.getTodayTasksForTag(task.tag).forEach(item => TaskStore.removeTask(item));
+        TaskStore.getTasksByTag(task.tag).forEach(item => TaskStore.removeTask(item));
     }
     return (
         <View style={styles.container}>

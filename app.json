@@ -9,9 +9,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/appicon.png",
+    "icon": "./assets/clipboard.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/clipboard.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
